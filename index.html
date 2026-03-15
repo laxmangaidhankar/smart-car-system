@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <meta name="description" content="APL ParkX – Smart Parking Management System"/>
+  <link rel="manifest" href="manifest.json"/>
+  <title>SmartPark – Dashboard</title>
+  <link rel="stylesheet" href="core.css"/>
+</head>
+<body>
+<!-- ═══ TOP NAV ═══ -->
+<header class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">P</div>
+    <span class="nav-title">APL<span>PARK</span></span>
+  </div>
+  <div class="nav-search">
+    <svg viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#94a3b8" stroke-width="1.5"/><path d="M15 15l-3-3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <input id="globalSearch" type="text" placeholder="Search vehicle, slot, session…"/>
+  </div>
+  <div class="nav-right">
+   
+    <div class="nav-user" id="userMenu">
+      <div class="nav-avatar">SJ</div>
+      <span>Sarah J.</span>
+      <svg viewBox="0 0 20 20" fill="currentColor" width="14"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <nav class="sidebar-nav">
+    <a href="index.html" class="nav-item active" data-page="dashboard">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="map.html" class="nav-item" data-page="map">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Real-time Map</span>
+    </a>
+    <a href="bookings.html" class="nav-item" data-page="bookings">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>My Bookings</span>
+      <span class="sidebar-badge">2</span>
+    </a>
+    <a href="vehicles.html" class="nav-item" data-page="vehicles">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z" stroke="currentColor" stroke-width="1.5"/><path d="M13 6H4l-1 5h14l-1-5h-3zm0 0V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Vehicles</span>
+    </a>
+    <a href="billing.html" class="nav-item" data-page="billing">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Billing</span>
+    </a>
+    <a href="#" class="nav-item" data-page="settings">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>Settings</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-status">
+      <span class="pulse-dot"></span>
+      <span>System Online</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<main class="main">
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#dbeafe;color:#2563eb">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M17 20H7a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12h6M9 8h6M9 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val" id="kpiTotal">10</div>
+        <div class="kpi-label">Total Slots</div>
+      </div>
+      
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#dcfce7;color:#16a34a">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val green" id="kpiAvail">18</div>
+        <div class="kpi-label">Available</div>
+      </div>
+      <div class="kpi-trend up">36%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#fee2e2;color:#dc2626">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val red" id="kpiOccupied">27</div>
+        <div class="kpi-label">Occupied</div>
+      </div>
+      <div class="kpi-trend down">54%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#dbeafe;color:#2563eb">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val blue" id="kpiReserved">3</div>
+        <div class="kpi-label">Reserved</div>
+      </div>
+      <div class="kpi-trend">6%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#f3e8ff;color:#9333ea">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val purple" id="kpiEV">2</div>
+        <div class="kpi-label">EV Charging</div>
+      </div>
+      <div class="kpi-trend">4%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:#fef9c3;color:#ca8a04">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-val gold" id="kpiRevenue">$1,240</div>
+        <div class="kpi-label">Today's Revenue</div>
+      </div>
+      <div class="kpi-trend up">+12%</div>
+    </div>
+  </div>
+
+  <!-- GRID ROW 1 -->
+  <div class="grid-row">
+
+    <!-- PARKING LOT MAP -->
+    <div class="card span-2">
+      <div class="card-head">
+        <h2>Parking Lot Overview</h2>
+        <div class="card-actions">
+          <button class="chip active" onclick="filterSlots('all',this)">All</button>
+          <button class="chip" onclick="filterSlots('available',this)">Available</button>
+          <button class="chip" onclick="filterSlots('occupied',this)">Occupied</button>
+          <button class="chip" onclick="filterSlots('reserved',this)">Reserved</button>
+          <a href="map.html" class="btn-sm">Live Map →</a>
+        </div>
+      </div>
+      <div class="lot-wrap">
+        <div class="lot-road"></div>
+        <div class="lot-grid" id="lotGrid"></div>
+      </div>
+      <div class="lot-legend">
+        <span><i style="background:#22c55e"></i>Available</span>
+        <span><i style="background:#ef4444"></i>Occupied</span>
+        <span><i style="background:#3b82f6"></i>Reserved</span>
+        <span><i style="background:#a855f7"></i>EV Charging</span>
+      </div>
+    </div>
+
+    <!-- ACTIVE SESSION -->
+    <div class="card">
+      <div class="card-head"><h2>Active Session</h2><span class="live-badge">● LIVE</span></div>
+      <div class="session-vehicle">
+        <div class="vehicle-icon">🚗</div>
+        <div>
+          <div class="vehicle-name" id="sessVehicle">Tesla Model 3</div>
+          <div class="vehicle-plate" id="sessPlate">SF-7789</div>
+        </div>
+        <div class="session-slot-badge" id="sessSlot">A3</div>
+      </div>
+      <div class="session-timer">
+        <div class="timer-ring">
+          <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="#e2e8f0" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#3b82f6" stroke-width="6" stroke-dasharray="213.6" stroke-dashoffset="80" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+          <div class="timer-inner">
+            <div class="timer-val" id="sessTimer">2:15</div>
+            <div class="timer-sub">elapsed</div>
+          </div>
+        </div>
+        <div class="session-stats">
+          <div class="ss-row"><span>Remaining</span><strong id="sessRemain">1h 45m</strong></div>
+          <div class="ss-row"><span>Rate</span><strong>$3.50/hr</strong></div>
+          <div class="ss-row"><span>Fee so far</span><strong class="green" id="sessFee">$7.88</strong></div>
+          <div class="ss-row"><span>Entry</span><strong id="sessEntry">10:30 AM</strong></div>
+        </div>
+      </div>
+      <button class="btn-primary full" onclick="endSession()">End Session & Pay</button>
+    </div>
+
+  </div>
+
+  <!-- GRID ROW 2 -->
+  <div class="grid-row">
+
+    <!-- RECENT ACTIVITY -->
+    <div class="card">
+      <div class="card-head"><h2>Recent Activity</h2><button class="btn-sm" onclick="showPage('bookings')">View All</button></div>
+      <div class="activity-list" id="activityList"></div>
+    </div>
+
+    <!-- REVENUE CHART -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Revenue (7 days)</h2>
+        <div class="card-actions">
+          <button class="chip active" onclick="switchChart('week',this)">Week</button>
+          <button class="chip" onclick="switchChart('month',this)">Month</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- OCCUPANCY DONUT -->
+    <div class="card">
+      <div class="card-head"><h2>Occupancy Rate</h2></div>
+      <div class="donut-wrap">
+        <canvas id="donutChart" height="160"></canvas>
+        <div class="donut-center">
+          <div class="donut-pct" id="donutPct">54%</div>
+          <div class="donut-sub">Occupied</div>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <span><i style="background:#ef4444"></i>Occupied 27</span>
+        <span><i style="background:#22c55e"></i>Available 18</span>
+        <span><i style="background:#3b82f6"></i>Reserved 3</span>
+        <span><i style="background:#a855f7"></i>EV 2</span>
+      </div>
+    </div>
+
+    <!-- CAMERA FEEDS -->
+    <div class="card cam-card">
+      <div class="card-head"><h2>Camera Feeds</h2><span class="live-badge">● LIVE</span></div>
+      <div class="cam-grid">
+        <div class="cam-box" id="camA">
+          <div class="cam-hud"><span class="cam-rec-dot">● REC</span><span class="cam-ts" id="camTs1"></span></div>
+          <div class="cam-scene cam-north"><div class="cam-car cc1"></div><div class="cam-car cc2"></div></div>
+          <div class="cam-footer">North Entrance</div>
+        </div>
+        <div class="cam-box" id="camB">
+          <div class="cam-hud"><span class="cam-rec-dot">● REC</span><span class="cam-ts" id="camTs2"></span></div>
+          <div class="cam-scene cam-south"><div class="cam-car cc3"></div></div>
+          <div class="cam-footer">South Exit</div>
+        </div>
+        <div class="cam-box" id="camC">
+          <div class="cam-hud"><span class="cam-rec-dot">● REC</span><span class="cam-ts" id="camTs3"></span></div>
+          <div class="cam-scene cam-east"><div class="cam-car cc4"></div><div class="cam-car cc5"></div></div>
+          <div class="cam-footer">Level B1</div>
+        </div>
+        <div class="cam-box" id="camD">
+          <div class="cam-hud"><span class="cam-rec-dot">● REC</span><span class="cam-ts" id="camTs4"></span></div>
+          <div class="cam-scene cam-west"><div class="cam-car cc6"></div></div>
+          <div class="cam-footer">Main Gate</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+</div>
+
+<!-- SLOT MODAL -->
+<div class="modal-overlay" id="slotModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modalTitle">Slot A1</h3>
+    <div id="modalBody"></div>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="core.js"></script>
+</body>
+</html>

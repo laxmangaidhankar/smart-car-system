@@ -1,0 +1,18 @@
+{
+  "name": "SmartPark – Car Parking System",
+  "short_name": "SmartPark",
+  "description": "Smart Car Parking Management Progressive Web App",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><rect x='15' y='15' width='70' height='70' rx='12' fill='%233b82f6'/><text x='50' y='68' font-size='52' font-weight='bold' text-anchor='middle' fill='white' font-family='Arial'>P</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

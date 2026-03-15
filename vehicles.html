@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="manifest" href="manifest.json"/>
+  <title>SmartPark – Vehicles</title>
+  <link rel="stylesheet" href="core.css"/>
+  <style>
+    .page-main{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+    .page-header{display:flex;align-items:center;justify-content:space-between}
+    .page-header h1{font-size:18px;font-weight:800}
+    .vehicles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .vehicle-card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .vc-color-bar{position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius) var(--radius) 0 0}
+    .vc-icon{font-size:36px;margin-bottom:8px}
+    .vc-name{font-size:14px;font-weight:700;margin-bottom:2px}
+    .vc-plate{font-size:12px;color:var(--muted);margin-bottom:10px}
+    .vc-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+    .vc-stat{background:#f8fafc;border-radius:6px;padding:6px 8px}
+    .vc-stat-label{font-size:9px;color:var(--muted);font-weight:600}
+    .vc-stat-val{font-size:13px;font-weight:700}
+    .vc-actions{display:flex;gap:6px}
+    .add-vehicle-form{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+    .form-group{display:flex;flex-direction:column;gap:4px}
+    .form-group label{font-size:11px;font-weight:600;color:var(--muted)}
+    .form-group input,.form-group select{padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;outline:none;color:var(--text)}
+    .form-group input:focus{border-color:var(--blue)}
+  </style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-brand"><div class="nav-logo">P</div><span class="nav-title">SMART<span>PARK</span></span></div>
+  <div class="nav-search">
+    <svg viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="#94a3b8" stroke-width="1.5"/><path d="M15 15l-3-3" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <input type="text" placeholder="Search vehicles…"/>
+  </div>
+  <div class="nav-right"><div class="nav-user"><div class="nav-avatar">SJ</div><span>Sarah J.</span></div></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <a href="index.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg><span>Dashboard</span></a>
+    <a href="map.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Real-time Map</span></a>
+    <a href="bookings.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>My Bookings</span><span class="sidebar-badge">2</span></a>
+    <a href="vehicles.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none"><path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z" stroke="currentColor" stroke-width="1.5"/><path d="M13 6H4l-1 5h14l-1-5h-3zm0 0V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Vehicles</span></a>
+    <a href="billing.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Billing</span></a>
+    <a href="#" class="nav-item"><svg viewBox="0 0 24 24" fill="none"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg><span>Settings</span></a>
+  </nav>
+  <div class="sidebar-footer"><div class="sidebar-status"><span class="pulse-dot"></span><span>System Online</span></div></div>
+</aside>
+
+<main class="page-main">
+  <div class="page-header">
+    <h1>Vehicle Management</h1>
+    <button class="btn-primary" onclick="toggleAddForm()">+ Add Vehicle</button>
+  </div>
+
+  <div class="add-vehicle-form" id="addForm" style="display:none">
+    <h3 style="margin-bottom:14px;font-size:14px;font-weight:700">Add New Vehicle</h3>
+    <div class="form-grid">
+      <div class="form-group"><label>Vehicle Name</label><input type="text" id="vName" placeholder="e.g. Toyota Camry"/></div>
+      <div class="form-group"><label>License Plate</label><input type="text" id="vPlate" placeholder="e.g. SF-1234"/></div>
+      <div class="form-group"><label>Type</label><select id="vType"><option>Sedan</option><option>SUV</option><option>Truck</option><option>EV</option><option>Motorcycle</option></select></div>
+      <div class="form-group"><label>Color</label><input type="color" id="vColor" value="#3b82f6"/></div>
+      <div class="form-group"><label>Owner Name</label><input type="text" id="vOwner" placeholder="Owner name"/></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-primary" onclick="addVehicle()">Add Vehicle</button>
+      <button class="btn-sm" onclick="toggleAddForm()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="vehicles-grid" id="vehiclesGrid"></div>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="core.js"></script>
+<script>
+const MY_VEHICLES = [
+  {name:'Tesla Model 3',plate:'SF-7789',type:'EV',color:'#3b82f6',owner:'Sarah J.',sessions:24,spent:'$186.50',status:'parked'},
+  {name:'BMW X5',plate:'SF-4421',type:'SUV',color:'#ef4444',owner:'Mike R.',sessions:18,spent:'$142.00',status:'away'},
+  {name:'Audi A4',plate:'SF-9901',type:'Sedan',color:'#22c55e',owner:'Lisa K.',sessions:31,spent:'$224.75',status:'reserved'},
+  {name:'Honda Civic',plate:'SF-3310',type:'Sedan',color:'#f59e0b',owner:'Tom B.',sessions:12,spent:'$89.25',status:'away'},
+  {name:'Ford Mustang',plate:'SF-7712',type:'Sedan',color:'#a855f7',owner:'Anna W.',sessions:9,spent:'$67.50',status:'parked'},
+  {name:'Tesla Model S',plate:'SF-5500',type:'EV',color:'#06b6d4',owner:'James L.',sessions:15,spent:'$118.00',status:'charging'},
+];
+
+const STATUS_COLORS = {parked:'#22c55e',away:'#94a3b8',reserved:'#3b82f6',charging:'#a855f7'};
+
+function renderVehicles(){
+  const grid = document.getElementById('vehiclesGrid');
+  grid.innerHTML = MY_VEHICLES.map((v,i)=>`
+    <div class="vehicle-card">
+      <div class="vc-color-bar" style="background:${v.color}"></div>
+      <div class="vc-icon">🚗</div>
+      <div class="vc-name">${v.name}</div>
+      <div class="vc-plate">${v.plate} · ${v.type}</div>
+      <div class="vc-stats">
+        <div class="vc-stat"><div class="vc-stat-label">Sessions</div><div class="vc-stat-val">${v.sessions}</div></div>
+        <div class="vc-stat"><div class="vc-stat-label">Total Spent</div><div class="vc-stat-val" style="color:var(--green)">${v.spent}</div></div>
+        <div class="vc-stat"><div class="vc-stat-label">Owner</div><div class="vc-stat-val" style="font-size:11px">${v.owner}</div></div>
+        <div class="vc-stat"><div class="vc-stat-label">Status</div><div class="vc-stat-val" style="color:${STATUS_COLORS[v.status]};font-size:11px">${v.status.charAt(0).toUpperCase()+v.status.slice(1)}</div></div>
+      </div>
+      <div class="vc-actions">
+        <button class="btn-sm" onclick="showToast('Booking for ${v.name}')">Book Slot</button>
+        <button class="btn-sm" onclick="removeVehicle(${i})">Remove</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleAddForm(){
+  const f=document.getElementById('addForm');
+  f.style.display=f.style.display==='none'?'block':'none';
+}
+
+function addVehicle(){
+  const name=document.getElementById('vName').value.trim();
+  const plate=document.getElementById('vPlate').value.trim();
+  if(!name||!plate){showToast('Please fill in name and plate');return;}
+  MY_VEHICLES.push({
+    name,plate,
+    type:document.getElementById('vType').value,
+    color:document.getElementById('vColor').value,
+    owner:document.getElementById('vOwner').value||'Unknown',
+    sessions:0,spent:'$0.00',status:'away'
+  });
+  renderVehicles();
+  toggleAddForm();
+  showToast(name+' added successfully');
+}
+
+function removeVehicle(i){
+  const name=MY_VEHICLES[i].name;
+  MY_VEHICLES.splice(i,1);
+  renderVehicles();
+  showToast(name+' removed');
+}
+
+document.addEventListener('DOMContentLoaded',renderVehicles);
+</script>
+</body>
+</html>
