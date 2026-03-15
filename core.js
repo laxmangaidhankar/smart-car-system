@@ -10,7 +10,7 @@ const VEHICLES = [
   {plate:'SF-8830',name:'Hyundai Sonata',color:'#84cc16',owner:'Chris M.'},
 ];
 
-const SLOT_ROWS = ['A','B','C','D'];
+const SLOT_ROWS = ['A','B','C','D','E'];
 const SLOTS_PER_ROW = 10;
 
 // Build 50 slots

@@ -149,7 +149,7 @@ button{cursor:pointer;font-family:inherit}
 }
 #lotGrid{
   display:grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(10, 2fr);
   gap:12px;
 }
 .slot{
